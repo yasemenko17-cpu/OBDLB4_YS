@@ -1,7 +1,8 @@
 -- title: Зведення замовлень за статусами
 WITH order_stats AS (
-    status, 
-    COUNT(*) AS total_orders
+    SELECT 
+        status, 
+        COUNT(*) AS total_orders
     FROM orders
     GROUP BY status
 )
