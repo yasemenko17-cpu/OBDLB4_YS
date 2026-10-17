@@ -1,7 +1,8 @@
 SET search_path = project;
 
--- Додаємо 100 000 рядків у таблицю orders з урахуванням GENERATED ALWAYS AS IDENTITY
-INSERT INTO orders OVERRIDING SYSTEM VALUE (id, order_date, status, customer_id)
+-- Додаємо 100 000 рядків у таблицю orders з правильним синтаксисом OVERRIDING SYSTEM VALUE
+INSERT INTO orders (id, order_date, status, customer_id)
+OVERRIDING SYSTEM VALUE
 SELECT 
     i AS id,
     '2024-01-01'::date + (i % 365) * INTERVAL '1 day' AS order_date,
@@ -12,6 +13,7 @@ ON CONFLICT (id) DO NOTHING;
 
 -- Додаємо позиції в order_item
 INSERT INTO order_item (orders_id, item_no, quantity, product_id)
+OVERRIDING SYSTEM VALUE
 SELECT 
     i AS orders_id,
     1 AS item_no,
