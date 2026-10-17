@@ -1,7 +1,7 @@
 SET search_path = project;
 
--- Додаємо 100 000 рядків у таблицю orders (тільки існуючі стовпці)
-INSERT INTO orders (id, order_date, status, customer_id)
+-- Додаємо 100 000 рядків у таблицю orders з урахуванням GENERATED ALWAYS AS IDENTITY
+INSERT INTO orders OVERRIDING SYSTEM VALUE (id, order_date, status, customer_id)
 SELECT 
     i AS id,
     '2024-01-01'::date + (i % 365) * INTERVAL '1 day' AS order_date,
@@ -10,7 +10,7 @@ SELECT
 FROM generate_series(100, 100099) AS s(i)
 ON CONFLICT (id) DO NOTHING;
 
--- Додаємо позиції в order_item (тут є quantity і ціна через product)
+-- Додаємо позиції в order_item
 INSERT INTO order_item (orders_id, item_no, quantity, product_id)
 SELECT 
     i AS orders_id,
