@@ -1,7 +1,7 @@
 SET search_path = project;
 
--- Додаємо рядки у таблицю orders
-INSERT INTO orders (id, order_date, status, customer_id)
+-- Додаємо 100 000 рядків у таблицю orders
+INSERT INTO project.orders (id, order_date, status, customer_id)
 OVERRIDING SYSTEM VALUE
 SELECT 
     i AS id,
@@ -12,7 +12,7 @@ FROM generate_series(100, 100099) AS s(i)
 ON CONFLICT (id) DO NOTHING;
 
 -- Додаємо позиції в order_item
-INSERT INTO order_item (orders_id, item_no, quantity, product_id)
+INSERT INTO project.order_item (orders_id, item_no, quantity, product_id)
 OVERRIDING SYSTEM VALUE
 SELECT 
     i AS orders_id,
