@@ -1,6 +1,6 @@
 SET search_path = project;
 
--- Додаємо 100 000 рядків у таблицю orders з правильним синтаксисом OVERRIDING SYSTEM VALUE
+-- Додаємо рядки у таблицю orders
 INSERT INTO orders (id, order_date, status, customer_id)
 OVERRIDING SYSTEM VALUE
 SELECT 
