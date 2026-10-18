@@ -14,7 +14,7 @@
 ```text
 Seq Scan on orders o  (cost=0.00..2850.00 rows=5000 width=32)
   Filter: ((status = 'completed'::text) AND (customer_id <= 15))
-
+```
 **Після індексу:**
 Bitmap Heap Scan on orders o  (cost=45.00..320.00 rows=5000 width=32)
   Recheck Cond: ((customer_id <= 15) AND (status = 'completed'::text))
@@ -25,7 +25,7 @@ Bitmap Heap Scan on orders o  (cost=45.00..320.00 rows=5000 width=32)
 ```text
 Seq Scan on orders  (cost=0.00..2850.00 rows=5000 width=28)
   Filter: ((status = 'cancelled'::text) AND (order_date >= '2024-01-01'::date))
-
+```
 **Після індексу:**
 Bitmap Heap Scan on orders  (cost=4.50..120.00 rows=5000 width=28)
   Recheck Cond: ((status = 'cancelled'::text) AND (order_date >= '2024-01-01'::date))
