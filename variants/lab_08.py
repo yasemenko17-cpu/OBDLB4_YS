@@ -27,3 +27,11 @@ def fix():
     """
     
     return indexes, query
+
+VARIANT = 0
+
+
+def fix() -> tuple[list[str], str]:
+    """Повертає пару (список команд CREATE INDEX, можливо порожній; текст запиту з параметром %(v)s)."""
+    raise NotImplementedError("Реалізуйте fix() за карткою варіанта задачі 8")
+
